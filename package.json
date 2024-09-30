@@ -11,6 +11,9 @@
     "nuxi:add": "pnpm dlx nuxi module add"
   },
   "dependencies": {
+    "@nuxt/eslint": "^0.5.7",
+    "@nuxt/icon": "^1.5.2",
+    "cva": "^1.0.0-beta.1",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "nuxt": "^3.13.2",
     "vue": "^3.5.10",
