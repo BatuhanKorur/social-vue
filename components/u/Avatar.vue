@@ -3,9 +3,6 @@
 </script>
 
 <template>
-<div>
-  <p>Label</p>
-</div>
 </template>
 
 <style scoped>

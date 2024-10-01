@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const model = defineModel()
 </script>
 
 <template>
@@ -7,6 +7,7 @@
     <Icon name="ri:search-line"
           class="text-muted-foreground size-5 group-focus-within:bg-blue-500" />
   <input type="search"
+         v-model="model"
          placeholder="Search anything..."
          class="w-full focus:outline-none text-base text-foreground placeholder:text-muted-foreground"/>
 </div>

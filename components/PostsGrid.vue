@@ -1,9 +1,12 @@
 <script setup lang="ts">
+const socialStore = useSocialStore()
 </script>
 
 <template>
-  <div class="flex items-center justify-center">
-    <p>Posts Grids</p>
+  <div>
+    <pre>
+      {{ socialStore.platforms }}
+    </pre>
   </div>
 </template>
 

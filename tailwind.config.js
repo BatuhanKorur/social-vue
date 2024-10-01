@@ -30,6 +30,11 @@ export default {
           background: 'hsl(var(--muted-background))',
           foreground: 'hsl(var(--muted-foreground))',
         },
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          background: 'hsl(var(--primary-background))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
         red: {
           DEFAULT: 'hsl(var(--red))',
           background: 'hsl(var(--red-background))',

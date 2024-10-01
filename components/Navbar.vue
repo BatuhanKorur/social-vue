@@ -8,8 +8,8 @@
     <h1 class="text-2xl font-medium">Social Search</h1>
   </div>
   <div class="flex space-x-2">
-    <UiBtn @click="console.log('Hi')" icon="ph:phone" />
-    <UiBtn label="Hello" />
+    <UBtn @click="console.log('Hi')" icon="ph:phone" />
+    <UBtn label="Hello" />
   </div>
 </div>
 </template>
