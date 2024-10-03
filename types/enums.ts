@@ -1,12 +1,17 @@
-export enum RapidAPIHeaders {
-  KEY = 'x-rapidapi-key',
-  HOST = 'x-rapidapi-host',
+export enum RapidHeaders {
+  KEY='x-rapidapi-key',
+  HOST='x-rapidapi-host',
+}
+
+export enum ApiStatus {
+  ERROR = 'error',
+  OK = 'ok',
 }
 
 export enum Platform {
-  TW = 'twitter',
-  FB = 'facebook',
-  IG = 'instagram',
+  TWITTER = 'twitter',
+  FACEBOOK = 'facebook',
+  INSTAGRAM = 'instagram',
 }
 
 export enum SortOrder {
@@ -20,13 +25,4 @@ export enum SortBy {
   COMMENTS = 'comments',
   SHARES = 'shares',
 }
-
-export enum TWSearchTypes {
-  TOP = 'Top',
-  LATEST = 'Latest',
-  PEOPLE = 'People',
-  PHOTOS = 'Photos',
-  VIDEOS = 'Videos',
-}
-
 

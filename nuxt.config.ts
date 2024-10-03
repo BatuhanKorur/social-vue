@@ -2,26 +2,25 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   modules: [
-    '@nuxtjs/tailwindcss',
     '@nuxt/eslint',
-    '@nuxt/icon',
-    '@pinia/nuxt',
     '@nuxt/image',
     '@nuxt/fonts',
-    'pinia-plugin-persistedstate/nuxt'
+    '@nuxt/ui',
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
+    'nuxt-swiper'
   ],
   runtimeConfig: {
     rapidApiKey: '',
     public: {
-      instagramApiHost: '',
-      twitterApiHost: 'twitter-api47.p.rapidapi.com',
-      facebookApiHost: '',
-    },
+      instagramApi: '',
+      twitterApi: '',
+      facebookApi: '',
+    }
   },
   devtools: {
     enabled: true
   },
-
   fonts: {
     google: {
       families: {
@@ -35,7 +34,6 @@ export default defineNuxtConfig({
     cssPath: '~/assets/app.pcss',
     viewer: false,
   },
-
   eslint: {
     config: {
       stylistic: true,

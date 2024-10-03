@@ -1,27 +1,29 @@
 import { type PlatformOption, Platform, SortBy, SortOrder} from "~/types";
+import { SortMethods } from "@/utils";
 
-export const useSocialStore = defineStore('socialStore', {
+export const useSearchStore = defineStore('searchStore', {
   state: (): {
     platforms: PlatformOption[],
     sortOrder: SortOrder,
     sortBy: SortBy,
+    searchResults: []
   } => ({
     platforms: [{
         label: 'Twitter',
         icon: 'ph:twitter-logo',
-        key: Platform.TW,
+        key: Platform.TWITTER,
         active: false,
         healthy: false,
       }, {
         label: 'Facebook',
         icon: 'ph:facebook-logo',
-        key: Platform.FB,
+        key: Platform.FACEBOOK,
         active: false,
         healthy: false,
       }, {
         label: 'Instagram',
         icon: 'ph:instagram-logo',
-        key: Platform.IG,
+        key: Platform.INSTAGRAM,
         active: false,
         healthy: false,
       }
@@ -41,19 +43,20 @@ export const useSocialStore = defineStore('socialStore', {
         { key: SortBy.COMMENTS, label: 'Comments' },
         { key: SortBy.SHARES, label: 'Shares' },
       ],
-    }
+    },
+    searchResults: [],
   }),
+  getters: {
+    getSort() {
+      return this.sort
+    }
+  },
   actions: {
-    togglePlatform(key: string) {
+    togglePlatform(key: Platform) {
       const platform = this.platforms.find(p => p.key === key)
       if (platform) {
         platform.active = !platform.active
       }
-    },
-    setUnhealthyPlatforms(keys: SocialPlatform[]) {
-      this.platforms.forEach(platform => {
-        platform.healthy = !keys.includes(platform.key)
-      })
     },
     setSortOrder(order: SortOrder) {
       this.sort.order = order
@@ -64,11 +67,26 @@ export const useSocialStore = defineStore('socialStore', {
     getSearchOptions() {
       return {
         platforms: this.platforms.filter(p => p.active).map(p => p.key),
-        sort: {
-          order: this.sort.order,
-          by: this.sort.by,
-        }
+        sortOrder: this.sort.order,
+        sortBy: this.sort.by,
+      }
+    },
+    setSearchResults(results) {
+      this.searchResults = results
+    },
+
+    sortResults() {
+      const posts = this.searchResults;
+      const sortOrder = this.sort.order || 'DSC'
+      const sortMethod = SortMethods[this.sort.by]?.[sortOrder];
+      if (sortMethod) {
+        const sortedPosts = posts.slice().sort(sortMethod);
+        this.setSearchResults(sortedPosts);
       }
     }
+  },
+  persist: {
+    key: 'search',
+    storage: piniaPluginPersistedstate.localStorage()
   },
 })
