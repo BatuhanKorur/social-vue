@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {ApiStatus} from "~/types";
-
 const appStore = useAppStore()
 const searchStore = useSearchStore()
 const error = ref(null)
@@ -18,7 +17,7 @@ async function fetchData(query: string) {
       method: 'POST',
       body: {
         query,
-        options: searchStore.getSearchOptions(),
+        options: searchStore.getSearchOptions,
       }
     })
     if(res.status === ApiStatus.OK){
@@ -45,13 +44,6 @@ async function fetchData(query: string) {
       class="bg-red-background border border-red text-red-foreground"
       icon="mdi:alert-octagon"
     />
-<!--    <UAlert-->
-<!--      v-if="!error"-->
-<!--      class="mt-2"-->
-<!--      icon="i-heroicons-command-line"-->
-<!--      :description="error.message"-->
-<!--      :title="error.error"-->
-<!--    />-->
     <div :class="{
       'grid grid-cols-1 md:grid-cols-2 gap-2': appStore.isGridView,
       'flex flex-col space-y-2': !appStore.isGridView
@@ -61,13 +53,6 @@ async function fetchData(query: string) {
                 :is-grid="appStore.isGridView"
                 :data="post"
       />
-      <pre>
-        {{ searchStore.searchResults }}
-      </pre>
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

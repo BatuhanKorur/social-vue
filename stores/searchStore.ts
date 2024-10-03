@@ -1,5 +1,5 @@
-import { type PlatformOption, Platform, SortBy, SortOrder} from "~/types";
-import { SortMethods } from "@/utils";
+import {Platform, type PlatformOption, SortBy, SortOrder} from "~/types";
+import {SortMethods} from "@/utils";
 
 export const useSearchStore = defineStore('searchStore', {
   state: (): {
@@ -28,6 +28,10 @@ export const useSearchStore = defineStore('searchStore', {
         healthy: false,
       }
     ],
+    filters: {
+      sortOrder: SortOrder.ASC,
+      sortBy: SortBy.DATE,
+    },
     sort: {
       order: SortOrder.ASC,
       by: SortBy.DATE,
@@ -47,8 +51,32 @@ export const useSearchStore = defineStore('searchStore', {
     searchResults: [],
   }),
   getters: {
-    getSort() {
-      return this.sort
+    getFilters() {
+      return this.filters
+    },
+    getSearchOptions() {
+      return {
+        platforms: this.platforms.filter(p => p.active).map(p => p.key),
+        sortOrder: this.filters.sortOrder,
+        sortBy: this.filters.sortBy,
+      }
+    },
+    getSortOptions() {
+      return {
+        sortOrder: [
+          { key: SortOrder.ASC, label: 'Ascending' },
+          { key: SortOrder.DESC, label: 'Descending' },
+        ],
+        sortBy: [
+          { key: SortBy.DATE, label: 'Date' },
+          { key: SortBy.LIKES, label: 'Likes' },
+          { key: SortBy.COMMENTS, label: 'Comments' },
+          { key: SortBy.SHARES, label: 'Shares' },
+        ],
+      }
+    },
+    getPosts(){
+      return this.searchResults
     }
   },
   actions: {
@@ -58,32 +86,20 @@ export const useSearchStore = defineStore('searchStore', {
         platform.active = !platform.active
       }
     },
-    setSortOrder(order: SortOrder) {
-      this.sort.order = order
+    setFilters(key: string, value: any) {
+      this.filters[key] = value
     },
-    setSortBy(by: SortBy) {
-      this.sort.by = by
-    },
-    getSearchOptions() {
-      return {
-        platforms: this.platforms.filter(p => p.active).map(p => p.key),
-        sortOrder: this.sort.order,
-        sortBy: this.sort.by,
+    applyFilters() {
+      const posts = this.searchResults;
+      const sortOrder = this.filters.sortOrder || 'DSC'
+      const sortMethod = SortMethods[this.filters.sortBy]?.[sortOrder];
+      if (sortMethod) {
+        this.searchResults = posts.slice().sort(sortMethod)
       }
     },
     setSearchResults(results) {
       this.searchResults = results
     },
-
-    sortResults() {
-      const posts = this.searchResults;
-      const sortOrder = this.sort.order || 'DSC'
-      const sortMethod = SortMethods[this.sort.by]?.[sortOrder];
-      if (sortMethod) {
-        const sortedPosts = posts.slice().sort(sortMethod);
-        this.setSearchResults(sortedPosts);
-      }
-    }
   },
   persist: {
     key: 'search',

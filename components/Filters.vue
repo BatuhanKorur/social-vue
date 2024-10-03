@@ -1,16 +1,22 @@
 <script setup lang="ts">
 const isOpen = ref(true)
 const searchStore = useSearchStore()
+const activeFilters = reactive({})
 
-const handleSortBy = (key: string) => {
-  searchStore.setSortBy(key)
-  searchStore.sortResults()
+function handleSort(type: string, key: string) {
+  searchStore.setFilters(type, key)
+  searchStore.applyFilters()
+  updateActiveFilters()
 }
 
-const handleSortOrder = (key: string) => {
-  searchStore.setSortOrder(key)
-  searchStore.sortResults()
+const updateActiveFilters = () => {
+  activeFilters.sortBy = searchStore.getFilters.sortBy
+  activeFilters.sortOrder = searchStore.getFilters.sortOrder
 }
+
+onMounted(() => {
+  updateActiveFilters()
+})
 
 </script>
 
@@ -25,15 +31,15 @@ const handleSortOrder = (key: string) => {
                      @click="isOpen = !isOpen"/>
       </div>
     </template>
-    <div v-if="isOpen" class="px-3 pt-2 pb-4 space-y-3">
+    <div v-if="isOpen && activeFilters" class="px-3 pt-2 pb-4 space-y-3">
       <VListToggle label="Sort By"
-                   :options="searchStore.sortOptions.by"
-                   :active-key="searchStore.sort.by"
-                   @toggle="handleSortBy"/>
+                   :options="searchStore.getSortOptions.sortBy"
+                   :active-key="activeFilters.sortBy"
+                   @toggle="(key) => handleSort('sortBy', key)"/>
       <VListToggle label="Sort Order"
-                   :options="searchStore.sortOptions.order"
-                   :active-key="searchStore.sort.order"
-                   @toggle="handleSortOrder"
+                   :options="searchStore.getSortOptions.sortOrder"
+                   :active-key="activeFilters.sortOrder"
+                   @toggle="(key) => handleSort('sortOrder', key)"
       />
     </div>
   </VCard>

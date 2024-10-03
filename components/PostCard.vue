@@ -33,13 +33,15 @@ const cardMenu = [
 
 <template>
   <VCard>
-    <div class="flex items-center justify-between p-2.5">
+    <div class="flex items-center justify-between p-3">
       <div class="flex items-center space-x-2">
         <UAvatar :src="data.user.profile_image"
-                 :alt="data.user.name"/>
-        <div>
-          <p class="text-base font-[450]">{{ data.user.name }}</p>
-          <p class="text-sm text-muted font-[450]">{{ data.user.handle }}</p>
+                 :alt="data.user.name"
+                 size="md"
+        />
+        <div class="space-y-px">
+          <p class="text-sm font-[450]">{{ data.user.name }}</p>
+          <p class="text-xs text-muted">@{{ data.user.handle }}</p>
         </div>
       </div>
       <UDropdown :items="cardMenu" :popper="{ placement: 'bottom-start' }">
@@ -49,8 +51,8 @@ const cardMenu = [
     <div :class="['px-4', {
       'grow': isGrid,
     }]">
-      <p class="text-base mb-2">{{ data.content }}</p>
-      <UCarousel v-slot="{ item }" :items="data.media" arrows>
+      <p class="text-base">{{ data.content }}</p>
+      <UCarousel v-slot="{ item }" :items="data.media" arrows class="my-2.5">
         <div class="h-72">
           <video v-if="item.type === 'video'"
                  :src="item.url"
@@ -66,10 +68,10 @@ const cardMenu = [
         </div>
       </UCarousel>
     </div>
-    <div class="flex items-center justify-between bg-muted-background/50 text-sm p-2 border-t mt-2">
+    <div class="flex items-center justify-between bg-muted/10 px-2.5 py-2 border-t">
       <div class="flex items-center space-x-1">
-        <UIcon :name="platformIcon"/>
-        <p>{{ time.pretty(data.created_at) }}</p>
+        <UIcon :name="platformIcon" />
+        <p class="text-xs leading-5">{{ time.pretty(data.created_at) }}</p>
       </div>
       <div class="flex space-x-3">
         <CountItem tip="Likes" icon="iconamoon:like-duotone" :count="data.likes"/>

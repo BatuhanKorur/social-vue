@@ -4,7 +4,7 @@ import {Option} from "@/types";
 withDefaults(defineProps<{
   label?: string
   options: Option[]
-  activeKey: string
+  activeKey?: string
 }>(), {
   label: 'Select an option',
   options: []

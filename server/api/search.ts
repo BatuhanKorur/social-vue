@@ -23,13 +23,19 @@ async function fetchDataFromPlatforms(platforms: Platform[], query: string, rapi
         method,
         headers: {
           [RapidHeaders.KEY]: rapidApiKey,
-          [RapidHeaders.HOST]: host
+          [RapidHeaders.HOST]: host,
         }
       });
       if (platform === Platform.TWITTER) {
         res.tweets.forEach((tweet: any) => {
           results.push(parse(Platform.TWITTER, tweet));
         });
+      }
+      if(platform === Platform.INSTAGRAM) {
+        console.log(res)
+        res.data.medias.forEach((media: any) => {
+          results.push(parse(Platform.INSTAGRAM, media));
+        })
       }
     } catch (error) {
       console.log(error)

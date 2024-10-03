@@ -7,12 +7,12 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex items-center">
-    <UTooltip :text="tip">
-      <Icon :name="icon" class="size-[1.2rem] text-muted"/>
-      <p class="font-medium text-sm leading-4">{{ count }}</p>
-    </UTooltip>
-  </div>
+  <UTooltip :text="tip">
+    <div class="flex items-center space-x-0.5">
+      <Icon :name="icon" class="size-[1.25rem] text-muted"/>
+      <p class="font-medium text-xs leading-4 text-foreground/90">{{ count }}</p>
+    </div>
+  </UTooltip>
 </template>
 
 <style scoped>

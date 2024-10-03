@@ -38,7 +38,7 @@ export const Api = {
         }
       case Platform.INSTAGRAM:
         return {
-          url: `https://${env.public.instagramApi}/v2/search?query=${query}`,
+          url: `https://${env.public.instagramApi}/hashtag_media?hashtag=${query}&feed_type=recent'`,
           method: 'GET',
           host: env.public.instagramApi,
         }
