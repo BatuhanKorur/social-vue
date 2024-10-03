@@ -4,16 +4,15 @@ interface Props {
   label?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   label: 'Platforms',
 })
 
 const handleClick = (e) => {
   if(e.healthy) {
     togglePlatform(e.key)
-  } else {
-    return
   }
+  return
 }
 </script>
 
@@ -29,7 +28,3 @@ const handleClick = (e) => {
   </div>
 </div>
 </template>
-
-<style scoped>
-
-</style>

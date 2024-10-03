@@ -1,30 +1,27 @@
-import { Platform, SocialPlatform, SortBy, SortOrder } from "~/types";
+import { type PlatformOption, Platform, SortBy, SortOrder} from "~/types";
 
 export const useSocialStore = defineStore('socialStore', {
   state: (): {
-    platforms: Platform[],
+    platforms: PlatformOption[],
     sortOrder: SortOrder,
     sortBy: SortBy,
   } => ({
-    platforms: [
-      {
+    platforms: [{
         label: 'Twitter',
         icon: 'ph:twitter-logo',
-        key: SocialPlatform.TWITTER,
+        key: Platform.TW,
         active: false,
         healthy: false,
-      },
-      {
+      }, {
         label: 'Facebook',
         icon: 'ph:facebook-logo',
-        key: SocialPlatform.FACEBOOK,
+        key: Platform.FB,
         active: false,
         healthy: false,
-      },
-      {
+      }, {
         label: 'Instagram',
         icon: 'ph:instagram-logo',
-        key: SocialPlatform.INSTAGRAM,
+        key: Platform.IG,
         active: false,
         healthy: false,
       }
@@ -64,5 +61,14 @@ export const useSocialStore = defineStore('socialStore', {
     setSortBy(by: SortBy) {
       this.sort.by = by
     },
+    getSearchOptions() {
+      return {
+        platforms: this.platforms.filter(p => p.active).map(p => p.key),
+        sort: {
+          order: this.sort.order,
+          by: this.sort.by,
+        }
+      }
+    }
   },
 })

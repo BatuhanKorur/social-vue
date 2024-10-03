@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ['selector'],
+  darkMode: ['selector', 'class'],
   content: [],
   theme: {
     container: {
@@ -10,10 +10,19 @@ export default {
         '2xl': '1400px',
       },
     },
+    fontFamily: {
+      sans: ['"Inter"', 'system-ui', 'sans-serif'],
+    },
     extend: {
       fontSize: {
-        sm: '0.875rem',
-        base: '0.94rem',
+        sm: ['0.9rem', {
+          lineHeight: '1.15rem',
+          letterSpacing: '-0.01em',
+        }],
+        base: ['0.95rem', {
+          lineHeight: '1.2rem',
+          letterSpacing: '-0.01em',
+        }],
         md: '1rem',
         lg: '1.1rem',
         xl: '1.2rem',
@@ -25,16 +34,19 @@ export default {
         foreground: 'hsl(var(--foreground))',
         card: 'hsl(var(--card))',
         border: 'hsl(var(--border))',
+
         muted: {
-          DEFAULT: 'hs(var(--muted))',
+          DEFAULT: 'hsl(var(--muted))',
           background: 'hsl(var(--muted-background))',
           foreground: 'hsl(var(--muted-foreground))',
         },
+
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           background: 'hsl(var(--primary-background))',
           foreground: 'hsl(var(--primary-foreground))',
         },
+
         red: {
           DEFAULT: 'hsl(var(--red))',
           background: 'hsl(var(--red-background))',

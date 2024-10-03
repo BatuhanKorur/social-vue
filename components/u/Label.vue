@@ -7,9 +7,9 @@ const labelStyles = cva({
   ],
   variants: {
     size: {
-      sm: 'text-sm font-[440] tracking-[-0.1px]',
-      md: 'text-base font-[475]',
-      lg: 'text-lg font-[500]',
+      sm: 'text-sm font-[450]',
+      md: 'text-base font-[500]',
+      lg: 'text-md font-[550]',
     },
   }
 })
