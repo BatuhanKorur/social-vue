@@ -8,7 +8,7 @@ defineProps({
 
 <template>
   <UTooltip :text="tip">
-    <div class="flex items-center space-x-0.5">
+    <div class="flex items-center space-x-[3px]">
       <Icon :name="icon" class="size-[1.25rem] text-muted"/>
       <p class="font-medium text-xs leading-4 text-foreground/90">{{ count }}</p>
     </div>

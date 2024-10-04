@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
-    'nuxt-swiper'
   ],
   runtimeConfig: {
     rapidApiKey: '',

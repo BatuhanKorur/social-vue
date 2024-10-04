@@ -32,22 +32,6 @@ export const useSearchStore = defineStore('searchStore', {
       sortOrder: SortOrder.ASC,
       sortBy: SortBy.DATE,
     },
-    sort: {
-      order: SortOrder.ASC,
-      by: SortBy.DATE,
-    },
-    sortOptions: {
-      order: [
-        { key: SortOrder.ASC, label: 'Ascending' },
-        { key: SortOrder.DESC, label: 'Descending' },
-      ],
-      by: [
-        { key: SortBy.DATE, label: 'Date' },
-        { key: SortBy.LIKES, label: 'Likes' },
-        { key: SortBy.COMMENTS, label: 'Comments' },
-        { key: SortBy.SHARES, label: 'Shares' },
-      ],
-    },
     searchResults: [],
   }),
   getters: {
@@ -77,6 +61,9 @@ export const useSearchStore = defineStore('searchStore', {
     },
     getPosts(){
       return this.searchResults
+    },
+    getActivePlatforms() {
+      return this.platforms.filter(p => p.active).map(p => p.key)
     }
   },
   actions: {

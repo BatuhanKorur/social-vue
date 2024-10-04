@@ -1,10 +1,8 @@
 <template>
-<div class="border bg-card rounded-md flex flex-col">
-  <template v-if="$slots.header">
-    <div class="px-4 py-3.5 border-b">
+  <div class="border bg-card rounded flex flex-col">
+    <div v-if="$slots.header" class="px-4 py-3 border-b">
       <slot name="header"></slot>
     </div>
-  </template>
-  <slot></slot>
-</div>
+    <slot></slot>
+  </div>
 </template>

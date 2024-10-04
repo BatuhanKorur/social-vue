@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const {platforms, togglePlatform} = useSearchStore()
+const searchStore = useSearchStore()
 const props = defineProps<{
   loading: boolean
 }>()
@@ -16,29 +16,28 @@ const canSubmit = computed(() => query.value.trim() !== '')
 
 <template>
   <VCard class="p-3">
-    <div class="flex items-center border rounded-md">
+    <div class="flex items-center border rounded-md h-10">
       <input type="search"
              v-model="query"
              placeholder="Search a keyword"
-             class="grow focus:outline-none bg-transparent mr-4 px-4 py-2"
+             class="grow focus:outline-none bg-transparent px-3"
       />
       <div
         @click="handleSearch"
         :class="[
-          'size-7 rounded-full flex items-center justify-center cursor-pointer',
-          'transition duration-200 mr-2 hover:opacity-80',
-          '[&>span]:text-foreground',
+          'h-full w-10 flex items-center justify-center cursor-pointer rounded-r text-white',
+          'transition duration-200 ease-in-out hover:opacity-90',
           canSubmit ? 'bg-accent' : 'bg-accent/30 [&>span]:opacity-50 cursor-not-allowed',
           ]">
         <UIcon :name="loading ? 'line-md:loading-twotone-loop' : 'ph:magnifying-glass-bold'"/>
       </div>
     </div>
-    <div class="space-x-1">
-      <VBadge v-for="platform in platforms"
+    <div class="space-x-1 mt-2">
+      <VBadge v-for="platform in searchStore.platforms"
               :icon="platform.icon"
               :label="platform.label"
-              :active="platform.active"
-              @click="togglePlatform(platform.key)"/>
+              :active="searchStore.getActivePlatforms.includes(platform.key)"
+              @click="searchStore.togglePlatform(platform.key)"/>
     </div>
   </VCard>
 </template>
